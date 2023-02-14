@@ -1,0 +1,1509 @@
+$breakpoints: (
+	'xs-phone': 355px,
+	'phone': 480px,
+	'tablet': 768px,
+	'desktop': 1024px,
+	'widescreen': 1200px,
+	'largescreen': 1430px
+);
+
+// keywords
+$media-expressions: (
+	'screen': 'screen',
+	'print': 'print',
+	'handheld': 'handheld',
+	'landscape': '(orientation: landscape)',
+	'portrait': '(orientation: portrait)',
+	'retina2x': '(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)',
+	'retina3x': '(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)'
+);
+
+// ligatured operators ≥ ≤
+
+@import 'vendors/include-media';
+@import 'vendors/normalize';
+
+@import 'base/functions';
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/helpers';
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/forms';
+@import 'base/icons';
+@import 'base/fonts';
+@import 'base/accordion-reset';
+@import 'base/lightbox';
+
+$largescreen: 1429px;
+$widescreen: 1200px;
+$desktop: 1024px;
+$desktop-sm: 1023px;
+$height-win-large: 999px;
+$height-win: 849px;
+$height-win-small: 699px;
+
+body {
+	overflow: hidden;
+
+	@include media('<largescreen') {
+		font-size: 18px;
+	}
+
+	@include media('<widescreen') {
+		font-size: 17px;
+	}
+
+	@include media('<desktop') {
+		font-size: 16px;
+		line-height: 1.25;
+	}
+
+	@include media('<xs-phone') {
+		font-size: 14px !important;
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win-large) {
+		font-size: 18px;
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+		font-size: 17px;
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win-small) {
+		font-size: 15px;
+	}
+
+	@media screen and (max-width: $largescreen) and (max-height: $height-win) {
+		font-size: 15px;
+	}
+
+	@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+		font-size: 16px;
+	}
+}
+
+#wrapper {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+}
+
+.wrapper-holder {
+	position: relative;
+
+	@include media('>=desktop') {
+		display: flex;
+		flex-wrap: wrap;
+		min-height: 100vh;
+		padding: 0;
+	}
+}
+
+.header {
+	position: relative;
+	background: $black;
+	height: 42px;
+	border-bottom: 2px solid $white;
+	z-index: 99;
+
+	@include media('>=desktop') {
+		display: none;
+	}
+}
+
+.header-holder {
+	position: relative;
+	padding: 5px 15px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.menu-opener {
+	@include fontsize(12px, 16px);
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	text-transform: uppercase;
+	color: $white;
+
+	.text {
+		position: relative;
+		display: block;
+		top: 1px;
+		margin: 0 8px 0 0;
+	}
+
+	i {
+		font-size: 20px;
+		position: relative;
+		display: block;
+	}
+
+	&:hover {
+		opacity: 0.9;
+	}
+}
+
+.nav-drop {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 42px;
+	max-height: 0;
+	transition: all 0.4s ease;
+	overflow: hidden;
+	z-index: 100;
+
+	.menu-active & {
+		max-height: calc(100vh - 42px);
+		height: calc(100vh - 42px);
+	}
+
+	.social-area {
+		padding: 28px 0;
+	}
+}
+
+.nav-area {
+	position: relative;
+	height: 100%;
+	overflow: auto;
+	background: $black;
+	transition: all 0.4s ease;
+	transform: translateY(-100%);
+
+	.menu-active & {
+		transform: none;
+	}
+}
+
+.menu {
+	@include fontsize(24px, 1);
+	@include listreset;
+	font-weight: 400;
+	position: relative;
+
+	li {
+		position: relative;
+		border-bottom: 2px solid $white;
+	}
+
+	a {
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		color: $white;
+		text-transform: uppercase;
+		padding: 8px 28px;
+		height: 82px;
+	}
+}
+
+.sidebar {
+	position: relative;
+	display: none;
+
+	@include media('>=desktop') {
+		width: 78px;
+		display: block;
+	}
+}
+
+.sidebar-content {
+	@include size(100%, 100%);
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 25px 5px;
+}
+
+.logo {
+	position: relative;
+	display: block;
+	width: 52px;
+	margin: 0 auto;
+
+	@include media('<desktop') {
+		width: 77px;
+		margin: 0;
+	}
+
+	a {
+		display: block;
+	}
+
+	img {
+		@include img-style;
+	}
+}
+
+.social-area {
+	position: relative;
+	text-align: center;
+}
+
+.social-networks {
+	@include listreset;
+	position: relative;
+
+	@include media('<desktop') {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		margin: 0 -8px;
+	}
+
+	li {
+		position: relative;
+		margin: 18px 0 0;
+
+		@include media('<desktop') {
+			padding: 0 8px;
+			margin: 0;
+		}
+
+		&.me-item {
+
+			@include media('<desktop') {
+				display: none;
+			}
+		}
+	}
+
+	a {
+		@include fontsize(26px, 1);
+		color: $white;
+		display: block;
+
+		i {
+			position: relative;
+			display: block;
+		}
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+}
+
+.accordion-area {
+	position: relative;
+
+	@include media('>=desktop') {
+		flex-grow: 1;
+		flex-basis: 0;
+		min-width: 0;
+	}
+}
+
+.accordion {
+
+	label {
+		border-left: 2px solid $white;
+		background: $black;
+		position: relative;
+
+		@include media('<desktop') {
+			display: none;
+		}
+	}
+
+	input[type=radio]:checked ~ label {
+		background: $black;
+		color: $white;
+		width: 0;
+	}
+
+	li:nth-child(even) > input + label {
+		background: $black;
+	}
+
+	label:hover,
+	li:nth-child(even) > input + label:hover {
+		background: transparent;
+	}
+
+	input[type=radio]:not(:checked) ~ label > * {
+		transform: none;
+	}
+
+	input[type=radio]:checked ~ label > * {
+		display: block;
+	}
+
+	.accslide {
+
+		@include media('<desktop') {
+			overflow: visible;
+			width: 100% !important;
+			float: none;
+			transition: none;
+		}
+	}
+}
+
+.step-opener-area {
+
+	@include media('<desktop') {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		padding: 12px 15px;
+		z-index: 6;
+	}
+}
+
+.step-num,
+.step-title {
+	@include fontsize(24px, 1);
+	font-weight: 400;
+	position: absolute;
+	left: 2px;
+	width: 58px;
+	color: $white;
+	padding: 25px 5px;
+	text-align: center;
+	text-transform: uppercase;
+	white-space: nowrap;
+	z-index: 3;
+
+	@include media('<largescreen') {
+		font-size: 18px;
+		left: 0;
+		padding: 15px 5px;
+	}
+
+	@include media('<desktop') {
+		position: relative;
+		left: 0;
+		width: auto;
+		white-space: nowrap;
+		padding: 0;
+		font-size: 14px;
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win-small) {
+		font-size: 20px;
+	}
+}
+
+.step-num {
+	top: 0;
+}
+
+.step-title {
+	transform: rotate(-90deg);
+	bottom: 5px;
+
+	@include media('<largescreen') {
+		bottom: 15px;
+	}
+
+	@include media('<desktop') {
+		transform: none;
+		bottom: 0;
+	}
+}
+
+.slide-content {
+	padding: 0;
+}
+
+.visual-section {
+	position: relative;
+	height: 100vh;
+
+	@include media('<desktop') {
+		height: calc(100vh - 42px);
+	}
+
+	&:before {
+		background: rgba($black, 0.3);
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: 2;
+	}
+
+	img {
+		@include size(100%, 100%);
+		object-fit: cover;
+		display: block;
+
+		@include media('<desktop') {
+			object-position: 100% 50%;
+		}
+	}
+}
+
+.vsiual-caption-area {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	z-index: 5;
+}
+
+.visual-caption {
+	text-align: center;
+	max-width: 390px;
+	white-space: normal;
+	opacity: 0;
+	visibility: hidden;
+	width: 100%;
+
+	@include media('<desktop') {
+		max-width: 260px;
+		opacity: 1;
+		visibility: visible;
+	}
+
+	h1 {
+		@include fontsize(27px, 32px);
+		font-weight: 400;
+		color: $white;
+		margin: 16px 0;
+
+		@include media('<widescreen') {
+			@include fontsize(24px, 1.2);
+		}
+
+		@include media('<desktop') {
+			@include fontsize(18px, 22px);
+			margin: 14px 0;
+		}
+	}
+
+	.play-btn-wrap {
+		position: relative;
+		display: block;
+	}
+
+	.btn-play {
+		@include fontsize(82px, 1);
+		display: block;
+		color: $white;
+
+		@include media('<widescreen') {
+			font-size: 62px;
+		}
+
+		@include media('<desktop') {
+			font-size: 52px;
+		}
+
+		i {
+			position: relative;
+			display: block;
+		}
+
+		&:hover {
+			opacity: 0.9;
+		}
+	}
+}
+
+.visual-logo {
+	position: relative;
+	display: block;
+	max-width: 382px;
+	margin: 0 auto;
+
+	@include media('<widescreen') {
+		max-width: 340px;
+	}
+
+	@include media('<desktop') {
+		max-width: 244px;
+	}
+
+	a {
+		display: block;
+	}
+
+	img {
+		height: auto;
+	}
+}
+
+.slide-content-area {
+	position: relative;
+	opacity: 0;
+	visibility: hidden;
+	padding: 75px 0 144px;
+	height: 100vh;
+
+	@include media('<largescreen') {
+		padding: 52px 0 120px;
+	}
+
+	@include media('<desktop') {
+		opacity: 1;
+		visibility: visible;
+		padding: 40px 0 0;
+		height: calc(100vh - 42px);
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+		padding: 75px 0 95px;
+	}
+}
+
+.heading-area {
+	position: relative;
+	padding: 0 40px 10px;
+	border-bottom: 2px solid $white;
+
+	@include media('<largescreen') {
+		padding: 0 25px 10px;
+	}
+
+	@include media('<widescreen') {
+		padding: 0 20px 10px;
+	}
+
+	@include media('<desktop') {
+		display: none;
+	}
+
+	h2 {
+		@include fontsize(42px, 1.2);
+		font-weight: 400;
+		text-transform: uppercase;
+		margin: 0;
+
+		@include media('<largescreen') {
+			font-size: 34px;
+		}
+
+		@include media('<widescreen') {
+			font-size: 32px;
+		}
+	}
+}
+
+.about-content-area {
+	position: relative;
+}
+
+.about-content-block {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	border-bottom: 2px solid $white;
+	height: calc(100vh - 255px);
+	overflow: auto;
+
+	@include media('<largescreen') {
+		height: calc(100vh - 195px);
+	}
+
+	@include media('<desktop') {
+		height: calc(100vh - 110px);
+		display: block;
+	}
+
+	.image-col {
+		position: relative;
+		width: 45%;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		padding: 15px;
+
+		@include media('<desktop') {
+			width: 100%;
+			display: block;
+			padding: 32px 0;
+			border-bottom: 2px solid $white;
+		}
+	}
+
+	.image-holder {
+		position: relative;
+		max-width: 405px;
+		margin: 0 auto;
+
+		@include media('<largescreen') {
+			max-width: 300px;
+		}
+
+		@include media('<widescreen') {
+			max-width: 220px;
+		}
+
+		@include media('<desktop') {
+			max-width: 188px;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+			max-width: 300px;
+		}
+
+		img {
+			@include img-style;
+		}
+	}
+}
+
+.about-content {
+	position: relative;
+	width: 55%;
+	padding: 24px 30px 45px;
+	border-left: 2px solid $white;
+
+	@include media('<largescreen') {
+		padding: 24px 25px;
+	}
+
+	@include media('<widescreen') {
+		padding: 24px 20px;
+	}
+
+	@include media('<desktop') {
+		width: 100%;
+		border-left: none;
+		white-space: normal;
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+		padding: 20px;
+	}
+
+	@media screen and (max-width: $largescreen) and (max-height: $height-win) {
+		padding: 18px 20px;
+	}
+}
+
+.text-block {
+	position: relative;
+
+	.title {
+		@include fontsize(42px, 50px);
+		font-weight: 400;
+		display: block;
+		padding: 0 50px 0 0;
+		margin: 0 0 14px;
+
+		@include media('<largescreen') {
+			@include fontsize(34px, 40px);
+			padding: 0 35px 0 0;
+		}
+
+		@include media('<widescreen') {
+			@include fontsize(30px, 36px);
+		}
+
+		@include media('<desktop') {
+			@include fontsize(24px, 30px);
+			padding: 0;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+			font-size: 40px;
+			line-height: 46px;
+		}
+
+		@media screen and (max-width: $largescreen) and (max-height: $height-win) {
+			@include fontsize(30px, 36px);
+		}
+
+		@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+			@include fontsize(24px, 30px);
+		}
+	}
+
+	p {
+		margin: 0 0 25px;
+
+		@include media('<largescreen') {
+			margin: 0 0 20px;
+		}
+
+		@include media('<widescreen') {
+			margin: 0 0 18px;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+			margin: 0 0 20px;
+		}
+
+		@media screen and (max-width: $largescreen) and (max-height: $height-win) {
+			margin: 0 0 16px;
+		}
+
+		@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+			margin: 0 0 18px;
+		}
+	}
+}
+
+.btn-wrap {
+	position: relative;
+	display: block;
+}
+
+.btn {
+	@include fontsize(19px, 22px);
+	font-weight: 400;
+	position: relative;
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	background: $white;
+	color: $black;
+	padding: 6px 28px 5px;
+	height: 48px;
+	text-transform: uppercase;
+	border-radius: 4px;
+
+	@include media('<largescreen') {
+		@include fontsize(16px, 20px);
+		padding: 6px 24px 5px;
+		height: 44px;
+	}
+
+	@include media('<desktop') {
+		@include fontsize(12px, 16px);
+		height: 32px;
+	}
+
+	&:hover {
+		opacity: 0.9;
+	}
+}
+
+.roadmap-content-area {
+	position: relative;
+
+	.heading-area {
+		border-bottom: none;
+	}
+}
+
+.roadmap-block-area {
+	position: relative;
+	height: calc(100vh - 135px);
+	padding: 15px 15px 25px;
+
+	@include media('<largescreen') {
+		padding: 10px 15px 20px;
+	}
+
+	@include media('<desktop') {
+		height: calc(100vh - 95px);
+	}
+}
+
+.roadmap-block-holder {
+	position: relative;
+	height: 100%;
+	padding: 0 40px;
+
+	@include media('<desktop') {
+		padding: 0 20px;
+	}
+
+	.image-holder {
+		position: relative;
+		border-radius: 20px;
+		margin: 0 auto;
+		max-width: 965px;
+		height: 100%;
+		overflow: auto;
+		border: 4px solid #b5b5b5;
+
+		@include media('<desktop') {
+			border-radius: 15px;
+		}
+
+		img {
+			@include size(100%, 1500px);
+			display: block;
+			border-radius: 20px;
+			object-fit: cover;
+
+			@include media('<desktop') {
+				border-radius: 15px;
+				height: 800px;
+			}
+
+			@include media('<tablet') {
+				height: 600px;
+			}
+		}
+	}
+}
+
+.info-content-area {
+	position: relative;
+}
+
+.info-content-block {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	border-bottom: 2px solid $white;
+	height: calc(100vh - 305px);
+	overflow: auto;
+
+	@include media('<largescreen') {
+		height: calc(100vh - 235px);
+	}
+
+	@include media('<desktop') {
+		height: calc(100vh - 110px);
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win-small) {
+		height: calc(100vh - 275px);
+	}
+
+	@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+		height: calc(100vh - 110px);
+	}
+
+	.image-col {
+		position: relative;
+		width: 45%;
+		padding: 95px 25px 15px;
+
+		@include media('<largescreen') {
+			padding: 50px 25px 15px;
+		}
+
+		@include media('<widescreen') {
+			padding: 35px 25px 15px;
+		}
+
+		@include media('<desktop') {
+			border-bottom: 2px solid $white;
+			padding: 35px 15px;
+			width: 100%;
+			order: 1;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win-large) {
+			padding: 50px 25px 15px;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win-small) {
+			padding: 30px 25px 15px;
+		}
+
+		@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+			padding: 35px 15px;
+		}
+	}
+
+	.btn-wrap {
+		padding: 42px 0 0;
+
+		@include media('<largescreen') {
+			padding: 25px 0 0;
+		}
+
+		@include media('<desktop') {
+			text-align: center;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win-large) {
+			padding: 25px 0 0;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+			padding: 20px 0 0;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win-small) {
+			padding: 15px 0 0;
+		}
+
+		@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+			padding: 20px 0 0;
+		}
+	}
+
+	.btn {
+		background: #3f3f3f;
+		color: $white;
+		min-width: 172px;
+
+		@include media('<largescreen') {
+			min-width: 150px;
+		}
+
+		@include media('<desktop') {
+			min-width: 110px;
+		}
+	}
+
+	.image-area {
+		position: relative;
+		max-width: 448px;
+		margin: 0 auto;
+
+		@include media('<desktop') {
+			max-width: 215px;
+			z-index: 5;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win-large) {
+			max-width: 360px;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+			max-width: 250px;
+		}
+
+		@media screen and (max-width: $largescreen) and (max-height: $height-win) {
+			max-width: 250px;
+		}
+	}
+
+	.image-holder {
+		position: relative;
+
+		&:before {
+			content: '';
+			position: absolute;
+			left: -10px;
+			right: 10px;
+			top: -10px;
+			bottom: 10px;
+			border: 2px solid $white;
+		}
+
+		img {
+			@include img-style;
+			position: relative;
+		}
+	}
+
+	&.notification-active {
+
+		.notification-area {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
+
+.info-content {
+	position: relative;
+	width: 55%;
+	padding: 40px 30px;
+	border-right: 2px solid $white;
+
+	@include media('<largescreen') {
+		padding: 30px 25px;
+	}
+
+	@include media('<widescreen') {
+		padding: 25px;
+	}
+
+	@include media('<desktop') {
+		width: 100%;
+		white-space: normal;
+		border-right: none;
+		order: 2;
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+		padding: 30px;
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win-small) {
+		padding: 30px 25px;
+	}
+
+	@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+		padding: 25px;
+	}
+}
+
+.faq-content-area {
+	position: relative;
+}
+
+.faq-head-text {
+	position: relative;
+	padding: 20px 30px;
+	border-bottom: 2px solid $white;
+
+	@include media('<largescreen') {
+		padding: 20px 25px;
+	}
+
+	@include media('<widescreen') {
+		padding: 18px 20px;
+	}
+
+	@include media('<desktop') {
+		white-space: normal;
+		display: none;
+	}
+
+	@include media('>=desktop', '<largescreen') {
+		font-size: 16px;
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win-small) {
+		padding: 15px 20px;
+	}
+
+	@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+		padding: 18px 20px;
+	}
+
+	p {
+		margin: 0;
+
+		+ p {
+			margin: 18px 0 0;
+		}
+	}
+}
+
+.faq-content-block {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	border-bottom: 2px solid $white;
+	height: calc(100vh - 355px);
+	overflow: auto;
+
+	@include media('<largescreen') {
+		height: calc(100vh - 275px);
+	}
+
+	@include media('<desktop') {
+		height: calc(100vh - 110px);
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+		height: calc(100vh - 315px);
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win-small) {
+		height: calc(100vh - 287px);
+	}
+
+	@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+		height: calc(100vh - 110px);
+	}
+
+	.image-col {
+		position: relative;
+		width: 45%;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		padding: 15px;
+
+		@include media('<desktop') {
+			width: 100%;
+			border-bottom: 2px solid $white;
+			padding: 30px 15px 25px;
+			order: 1;
+		}
+	}
+
+	.image-holder {
+		position: relative;
+		max-width: 384px;
+		margin: 0 auto;
+
+		@include media('<largescreen') {
+			max-width: 300px;
+		}
+
+		@include media('<widescreen') {
+			max-width: 270px;
+		}
+
+		@include media('<desktop') {
+			max-width: 220px;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win-large) {
+			max-width: 300px;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win-small) {
+			max-width: 250px;
+		}
+
+		@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+			max-width: 220px;
+		}
+
+		img {
+			@include img-style;
+		}
+	}
+}
+
+.faq-accordion-area {
+	position: relative;
+	width: 55%;
+	overflow: hidden;
+	border-right: 2px solid $white;
+
+	@include media('<desktop') {
+		width: 100%;
+		order: 2;
+		border-right: none;
+		white-space: normal;
+	}
+
+	.faq-head-text {
+		display: block;
+
+		@include media('>=desktop') {
+			display: none;
+		}
+	}
+}
+
+.faq-accordion {
+	position: relative;
+	counter-reset: item;
+	list-style: none;
+	padding: 0;
+	margin: 0 0 -2px;
+
+	li {
+		position: relative;
+		padding: 0 0 0 115px;
+		border-bottom: 2px solid $white;
+
+		@include media('<largescreen') {
+			padding: 0 0 0 80px;
+		}
+
+		@include media('<widescreen') {
+			padding: 0 0 0 60px;
+		}
+
+		&.active {
+
+			a {
+
+				.ico {
+
+					&:after {
+						opacity: 0;
+						visibility: hidden;
+					}
+				}
+			}
+		}
+
+		a {
+			position: relative;
+			display: block;
+			color: $white;
+			transition: all 0.4s ease;
+			padding: 26px 46px 26px 18px;
+
+			@include media('<largescreen') {
+				padding: 20px 40px 20px 15px;
+			}
+
+			@include media('<widescreen') {
+				padding: 18px 35px 18px 15px;
+			}
+
+			@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+				padding: 20px 40px 20px 15px;
+			}
+
+			@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+				padding: 18px 35px 18px 15px;
+			}
+
+			.ico {
+				@include size(20px, 20px);
+				position: absolute;
+				right: 20px;
+				top: 50%;
+				transition: all 0.4s ease;
+				margin: -10px 0 0;
+
+				@include media('<largescreen') {
+					right: 15px;
+				}
+
+				@include media('<widescreen') {
+					@include size(16px, 16px);
+					right: 12px;
+					margin: -8px 0 0;
+				}
+
+				&:before {
+					@include size(20px, 2px);
+					background: $white;
+					content: '';
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					margin: -1px 0 0 -10px;
+					transition: all 0.4s ease;
+
+					@include media('<widescreen') {
+						@include size(16px, 2px);
+						margin: -1px 0 0 -8px;
+					}
+				}
+
+				&:after {
+					@include size(2px, 20px);
+					background: $white;
+					content: '';
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					margin: -10px 0 0 -1px;
+					transition: all 0.4s ease;
+
+					@include media('<widescreen') {
+						@include size(2px, 16px);
+						margin: -8px 0 0 -1px;
+					}
+				}
+			}
+		}
+	}
+
+	.faq-num {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 115px;
+		text-align: center;
+		border-right: 2px solid $white;
+		padding: 26px 5px;
+
+		@include media('<largescreen') {
+			width: 80px;
+			padding: 20px 5px;
+		}
+
+		@include media('<widescreen') {
+			padding: 18px 5px;
+			width: 60px;
+		}
+
+		@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+			padding: 20px 5px;
+		}
+
+		@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+			padding: 18px 5px;
+		}
+
+		&:before {
+			content: "0" counters(item, ".");
+			counter-increment: item;
+			display: block;
+		}
+	}
+}
+
+.faq-slide-content {
+	position: relative;
+	padding: 0 30px 25px 22px;
+
+	@include media('<largescreen') {
+		padding: 0 25px 22px 20px;
+	}
+
+	@include media('<widescreen') {
+		padding: 0 20px 22px;
+	}
+
+	@media screen and (min-width: $largescreen) and (max-height: $height-win) {
+		padding: 0 25px 18px 20px;
+	}
+
+	@media screen and (max-width: $largescreen) and (max-height: $height-win) {
+		padding: 0 25px 18px 20px;
+	}
+
+	@media screen and (max-width: $desktop-sm) and (max-height: $height-win) {
+		padding: 0 20px 22px;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+.notification-area {
+	position: absolute;
+	right: 15px;
+	top: 0;
+	transition: all 0.2s ease;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 2;
+
+	@include media('>=widescreen') {
+		top: 10px;
+	}
+}
+
+.notification-text {
+	@include fontsize(11px, 14px);
+	font-weight: 400;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	border-radius: 3px;
+	background: $white;
+	color: $black;
+	text-transform: uppercase;
+	padding: 3px 28px 3px 10px;
+	height: 32px;
+
+	@include media('>=widescreen') {
+		@include fontsize(16px, 20px);
+		padding: 5px 35px 5px 18px;
+		height: 54px;
+	}
+
+	.icon-holder {
+		position: relative;
+		display: block;
+		margin: 0 8px 0 0;
+		font-size: 15px;
+
+		@include media('>=widescreen') {
+			font-size: 28px;
+			margin: 0 10px 0 0;
+		}
+
+		i {
+			position: relative;
+			display: block;
+		}
+	}
+
+	.text {
+		position: relative;
+		padding: 2px 0 0;
+		display: block;
+	}
+
+	.notification-close {
+		position: absolute;
+		right: 4px;
+		top: 5px;
+		cursor: pointer;
+		z-index: 2;
+	}
+}
+
+/* scrollbars */
+.jcf-scrollable-wrapper {
+	box-sizing: content-box;
+	position: relative;
+}
+.jcf-scrollbar-vertical {
+	position: absolute;
+	cursor: default;
+	background: #e3e3e3;
+	width: 14px;
+	bottom: 0;
+	right: 0;
+	top: 0;
+}
+.jcf-scrollbar-vertical .jcf-scrollbar-dec,
+.jcf-scrollbar-vertical .jcf-scrollbar-inc {
+	background: #bbb;
+	height: 14px;
+	width: 14px;
+	left: 0;
+	top: 0;
+}
+.jcf-scrollbar-vertical .jcf-scrollbar-inc {
+	top: auto;
+	bottom: 0;
+}
+.jcf-scrollbar-vertical .jcf-scrollbar-handle {
+	background: #888;
+	height: 1px;
+	width: 14px;
+}
+.jcf-scrollbar-horizontal {
+	position: absolute;
+	background: #e3e3e3;
+	right: auto;
+	top: auto;
+	left: 0;
+	bottom: 0;
+	width: 1px;
+	height: 14px;
+}
+
+
+.mCSB_inside > .mCSB_container {
+	margin-right: 0;
+}
+
+.mCSB_scrollTools .mCSB_draggerRail {
+	width: 14px;
+	background: #d9d9d9 !important;
+	border-radius: 14px;
+
+	@include media('<largescreen') {
+		width: 10px;
+	}
+}
+
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	width: 10px;
+	background: #2d2d2d !important;
+	border-radius: 14px;
+	margin: 0 auto;
+
+	@include media('<largescreen') {
+		width: 6px;
+	}
+}
+
+.mCSB_scrollTools {
+	right: 3px;
+	top: 5px;
+	bottom: 5px;
+}
