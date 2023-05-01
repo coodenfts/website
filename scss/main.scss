@@ -1507,3 +1507,119 @@ body {
 	top: 5px;
 	bottom: 5px;
 }
+
+.acc-text-box {
+	min-height: calc(100vh - 235px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+
+	@include media('<desktop') {
+		min-height: calc(100vh - 76px);
+	}
+
+	.acc-text-frame {
+		text-align: center;
+	}
+
+	h3 {
+		font-size: 60px;
+		font-weight: 400;
+		margin: 0 0 30px;
+
+		&.small {
+			margin: 0 0 10px;
+
+			@include media('>=largescreen') {
+				font-size: 52px;
+			}
+		}
+
+		@include media('<largescreen') {
+			font-size: 50px;
+			margin: 0 0 25px;
+		}
+
+		@include media('<widescreen') {
+			font-size: 40px;
+		}
+
+		@include media('<desktop') {
+			font-size: 32px;
+			margin: 0 0 20px;
+		}
+	}
+
+	.coming-soon-text {
+		font-size: 42px;
+		line-height: 50px;
+		max-width: 547px;
+		margin: 0 auto;
+
+		@include media('<widescreen') {
+			font-size: 34px;
+			line-height: 38px;
+		}
+
+		@include media('<desktop') {
+			font-size: 28px;
+			line-height: 33px;
+		}
+
+		p {
+			margin: 0;
+		}
+
+		.text-color {
+			color: rgba(208, 176, 29, 1);
+		}
+	}
+
+	.more-text {
+		font-size: 35px;
+		line-height: 40px;
+		display: block;
+
+		@include media('<desktop') {
+			font-size: 24px;
+			line-height: 28px;
+		}
+
+		@include media('<tablet') {
+			font-size: 19px;
+			line-height: 24px;
+		}
+	}
+}
+
+.list-squares {
+	margin: 0 0 8px;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	li {
+		width: 65px;
+		height: 65px;
+		border-radius: 6px;
+		background: #78B159;
+		margin: 0 4px;
+
+		@include media('<desktop') {
+			width: 32px;
+			height: 32px;
+		}
+
+		&.yellow {
+			background: #F4900C;
+		}
+
+		&.red {
+			background: #DD2E44;
+		}
+	}
+}
