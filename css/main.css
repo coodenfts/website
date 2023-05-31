@@ -3146,8 +3146,6 @@ body {
   }
 }
 .info-content-block .btn {
-  background: #3f3f3f;
-  color: #fff;
   min-width: 172px;
 }
 @media (max-width: 1429px) {
